@@ -1,0 +1,10 @@
+.myContainerMain {
+    color: #ddd;
+}
+.myHeaderUser{
+    padding: 5px;
+}
+.myTableNotes{
+    color: #ddd !important;
+    border: none !important;
+}
