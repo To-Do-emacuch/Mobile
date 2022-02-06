@@ -1,10 +1,40 @@
+html{
+    height: 100vh;
+}
+body
+{
+    height: 100vh;
+}
 .myContainerMain {
     color: #ddd;
+    height: 100%;
 }
 .myHeaderUser{
     padding: 5px;
+    
 }
 .myTableNotes{
     color: #ddd !important;
+    border: none !important;
+}
+.myMainTableNote{
+    line-height: 3;
+}
+.myAddNoteButton{
+    position: absolute;
+    right: 10%;
+    bottom: 5%;
+
+    font-size: 3em;
+    width: fit-content !important;
+    height: fit-content !important;
+    
+    margin: 0;
+    
+    background-color: #121517;
+}
+
+.myBtnDropdownCercaTags{
+    background-color: #CC2050 !important;
     border: none !important;
 }
