@@ -38,3 +38,12 @@ body
     background-color: #CC2050 !important;
     border: none !important;
 }
+.myUlDropdownCercaTags *{
+    color: #ddd !important;
+}
+.myUlDropdownCercaTags a:hover{
+    background-color: #121517 !important;
+}
+.myBtnCerca{
+    color: #ddd;
+}

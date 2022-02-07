@@ -41,17 +41,19 @@
                 <div class="row myHeaderUser">
                     <div class="dropdown show">
                         <div class="dropdown">
-                            <button class="btn btn-secondary dropdown-toggle myBtnDropdownCercaTags" type="button" id="dropdownMenuButton1"
-                                data-bs-toggle="dropdown" aria-expanded="false" >
+                            <button class="btn btn-secondary dropdown-toggle myBtnDropdownCercaTags" type="button"
+                                id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
                                 Cerca Tra i Tags
                             </button>
-                            <ul class="dropdown-menu" style="width: 70% !important;max-height: 200px !important; overflow: auto !important;" aria-labelledby="dropdownMenuButton1"
-                                style="">
-                                <div class="overflow-auto">
-                                    <div class="input-group mb-3">
-                                        <input type="text" class="form-control" placeholder="Recipient's username" aria-label="Recipient's username" aria-describedby="basic-addon2">
-                                        <span class="input-group-text" id="basic-addon2">@example.com</span>
-                                      </div>
+                            <ul class="dropdown-menu myUlDropdownCercaTags bg-dark"
+                                style="width: 80% !important;"
+                                aria-labelledby="dropdownMenuButton1" style="">
+                                <div class="input-group mb-3" style="padding: 10px; ">
+                                    <input type="text" class="form-control bg-dark" placeholder="Nome Tag"
+                                        aria-label="Recipient's username" aria-describedby="basic-addon2" style="border: 1px solid #202020 !important;">
+                                    <span class="input-group-text bg-dark" id="basic-addon2" style="border: 1px solid #202020 !important;">Cerca</span>
+                                </div>
+                                <div class="overflow-auto" style="overflow: scroll !important; height: 170px !important; resize: vertical !important;">
                                     <li><a class="dropdown-item" href="#">Action</a></li>
                                     <li><a class="dropdown-item" href="#">Another action</a></li>
                                     <li><a class="dropdown-item" href="#">Something else here</a></li>
@@ -96,7 +98,7 @@
                         </div>
                     </div>
                     <div class="card my-5 bg-dark" style="border: none;">
-                        <table class="table table-sm table-dark myMainTableNotee">
+                        <table class="table table-sm table-dark myMainTableNote">
                             <tbody>
                                 <tr>
                                     <th scope="row" style="width: 100%;">
