@@ -11,14 +11,12 @@ body
 }
 .myHeaderUser{
     padding: 5px;
-    
-}
-.myTableNotes{
-    color: #ddd !important;
-    border: none !important;
 }
 .myMainTableNote{
     line-height: 3;
+}
+.myMainTableNoteWrapper{
+    overflow: auto !important;
 }
 .myAddNoteButton{
     position: absolute;
