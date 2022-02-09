@@ -32,5 +32,11 @@ $(function () {
             let accEmailSize = static_myAccountEmailFontSize - percent/2
             myAccountEmail.css("font-size", (accEmailSize + "px"));
         }
+        else{
+            let accNameSize = static_myAccountNameFontSize - 20/2
+            myAccountName.css("font-size", (accNameSize + "px"));
+            let accEmailSize = static_myAccountEmailFontSize - 20/2
+            myAccountEmail.css("font-size", (accEmailSize + "px"));
+        }
     }
 })
