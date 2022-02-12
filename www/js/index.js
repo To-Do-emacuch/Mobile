@@ -11,33 +11,43 @@ $(function () {
         );
     });
     //CSS
-    $("#myTbody").on("swipe", function () {
+    $("#TableWrapper").on("swipe", function () {
         alert("ye")
     })
-    const tBody = document.getElementsByClassName('myMainTableNoteWrapper')[0]
-    let touchstartX = 0
-    let touchendX = 0
+    const tableWrapper = document.getElementById("TableWrapper");
 
-    let difference = 0;
-    function handleGesture() {
-        difference = touchendX > touchstartX ? touchendX - touchstartX : touchstartX - touchendX
-    }
     let lastSwiperPositionX = 0;
-    let actualPositionX = 0;
-    tBody.addEventListener('touchstart', e => {
+    tableWrapper.addEventListener('touchstart', e => {
         lastSwiperPositionX = e.changedTouches[0].screenX
     })
-
-    tBody.addEventListener('touchend', e => {
+    tableWrapper.addEventListener('touchend', e => {
         lastSwiperPositionX = 0;
-        handleGesture()
+        let target = e.target;
+        console.log(target.tagName)
+        if (target.tagName.toUpperCase() != "DIV" || target.tagName.toUpperCase() != "TD" || target.tagName.toUpperCase() != "H1") {
+            var touch = e.touches[0] || e.changedTouches[0];
+            x = touch.pageX;
+            y = touch.pageY;
+            let rowEnd;
+            if (target.tagName.toUpperCase() == "H1")
+                rowEnd = $(target).parents().eq(0)
+            else if ($(target).parents().eq(0).hasClass("myMainTableApparentRow"))
+                rowEnd = $(target)
+            else
+                rowEnd = $(target).children("div").eq(0)
+
+                console.log((parseInt(baseLeft)+"px"))
+            rowEnd.css("left", (parseInt(baseLeft)+"px"))
+        }
+        else
+            console.log("Not Identified Target");
     })
-    let first=true;
+    let first = true;
+    let baseLeft;
     for (let row of $(".myMainTableNoteWrapper").children("div")) {
         let apparentRow = $(row).children("div")
         let offsetDiv = row.getBoundingClientRect();
-        if(first)
-        {
+        if (first) {
             first = false;
             baseTop = $(row).css("height")
         }
@@ -47,51 +57,47 @@ $(function () {
         })
         apparentRow.css({
             "position": "absolute",
-            "top": (offsetDiv.top-baseTop),
+            "top": (offsetDiv.top - baseTop),
             "left": offsetDiv.left,
             "width": $(row).css("width"),
             "height": $(row).css("height")
         })
+        baseLeft = $(apparentRow).css("left").slice(0, apparentRow.css("left").length - 2);
     }
-    tBody.addEventListener("touchmove", e => {
+    tableWrapper.addEventListener("touchmove", e => {
         let target = e.target;
-        if (target.tagName.toUpperCase() != "TR" || target.tagName.toUpperCase() != "TD" || target.tagName.toUpperCase() != "H1") {
+        if (target.tagName.toUpperCase() != "DIV" || target.tagName.toUpperCase() != "TD" || target.tagName.toUpperCase() != "H1") {
             var touch = e.touches[0] || e.changedTouches[0];
             x = touch.pageX;
             y = touch.pageY;
-            let tr;
-            console.log($(target).parents()[0])
-            if (target.tagName.toUpperCase() == "TR")
-                tr = target
+            let row;
+            if (target.tagName.toUpperCase() == "h1")
+                row = $(target)
+            else if ($(target).parents().eq(0).hasClass("myMainTableApparentRow"))
+                row = $(target).parents().eq(0)
             else
-                tr = $(target).parents()[0]
-            console.log(tr)
-            let offsetDiv = tr.getBoundingClientRect();
-            tr = $(tr);
-            console.log(offsetDiv)
-            tr.children("div").css({
-                "top": offsetDiv.top,
-                "left": offsetDiv.left,
-                "width": tr.css("width"),
-                "height": tr.css("height")
-            })
-            let marginSet;
+                row = $(target)
+            console.log(row)
             if (lastSwiperPositionX < x) {
-                //swiping right
-                marginSet = lastSwiperPositionX + x;/*
-                tr.css("display", "block");
-                tr.css("padding-right", 0);
-                tr.css("padding-left", marginSet)*/
+                //right
+                let leftX = row.css("left").slice(0, row.css("left").length - 2);
+                row.css("left", parseFloat(leftX) + (x - lastSwiperPositionX))
+                leftX = row.css("left").slice(0, row.css("left").length - 2);
+                let widthDiv = row.children("h1").css("width").slice(0, row.children("h1").css("width").length - 2);
+                if (parseFloat(leftX) > (+widthDiv / 3 + +baseLeft))
+                    alert("Lanciato")
             }
             else {
-                //swiping left
-                marginSet = lastSwiperPositionX - x;/*
-                tr.css("display", "block");
-                tr.css("padding-left", 0);
-                tr.css("padding-right", marginSet)*/
+                //left
+                let leftX = row.css("left").slice(0, row.css("left").length - 2);
+                row.css("left", leftX - (lastSwiperPositionX - x))
+                let widthDiv = row.children("h1").css("width").slice(0, row.children("h1").css("width").length - 2);
+                console.log(Math.abs(parseFloat(leftX)) + " - " + (+widthDiv / 2 + +baseLeft))
+                if (Math.abs(parseFloat(leftX)) > (+widthDiv / 3 + +baseLeft))
+                    alert("Lanciato")
             }
         }
-        else console.log(target.tagName.toString());
+        else console.log("ERROR:" + target.tagName.toString());
         lastSwiperPositionX = x;
     })
 })
